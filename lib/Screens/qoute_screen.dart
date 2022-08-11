@@ -24,7 +24,7 @@ class _QouteScreenState extends State<QouteScreen> {
     final qouteButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.blueAccent,
+      color: Colors.indigo,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
@@ -41,7 +41,7 @@ class _QouteScreenState extends State<QouteScreen> {
           });
         },
         child: const Text(
-          "Get Qoute",
+          "Generate Qoute",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,
@@ -55,12 +55,21 @@ class _QouteScreenState extends State<QouteScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Qoutes For You!"),
+        title: const Text(
+          "Qoutes For You!",
+          style: TextStyle(
+              color: Colors.indigo,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              fontSize: 25),
+        ),
         centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_circle_left_outlined,
-            color: Colors.redAccent,
+            color: Colors.indigo,
           ),
           onPressed: () {
             //passing this to our root

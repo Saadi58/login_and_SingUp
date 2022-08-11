@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Screens/home_screen.dart';
-import 'package:flutter_application_1/models/user_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -63,7 +62,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: lastNameEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{3,}$');
         if (value!.isEmpty) {
           return ("Last Name cannot be Empty.");
         }
@@ -189,7 +187,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_circle_left_outlined,
-            color: Colors.redAccent,
+            color: Colors.indigo,
           ),
           onPressed: () {
             //passing this to our root
@@ -293,7 +291,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => HomeScreen()),
         (route) => false);
   }
 }

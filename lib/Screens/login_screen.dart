@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Screens/home_screen.dart';
 import 'package:flutter_application_1/Screens/registration_screen.dart';
+import 'package:flutter_application_1/controllers/login_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -123,12 +124,43 @@ class _LoginScreenState extends State<LoginScreen> {
                       child:
                           Image.asset("assets/logo.png", fit: BoxFit.contain),
                     ),
-                    const SizedBox(height: 45),
-                    emailField,
                     const SizedBox(height: 25),
+                    emailField,
+                    const SizedBox(height: 15),
                     passwordField,
-                    const SizedBox(height: 35),
+                    const SizedBox(height: 15),
                     loginButton,
+                    const SizedBox(height: 15),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                            child: Image.network(
+                              "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png",
+                              height: 40,
+                            ),
+                            onTap: () {
+                              Provider.of<LogInController>(context,
+                                      listen: false)
+                                  .googleLogin()
+                                  .then((_) {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
+                              });
+                            }),
+                        const SizedBox(width: 15),
+                        GestureDetector(
+                            child: Image.network(
+                              "https://seeklogo.com/images/F/facebook-icon-circle-logo-09F32F61FF-seeklogo.com.png",
+                              height: 40,
+                            ),
+                            onTap: () {
+                              //Provider.of<LoginController>(context, listen: false).facebooklogin();
+                            }),
+                      ],
+                    ),
                     const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -171,8 +203,10 @@ class _LoginScreenState extends State<LoginScreen> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomeScreen())),
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                            num: 1,
+                          ))),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
